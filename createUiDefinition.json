@@ -3,8 +3,74 @@
     "handler": "Microsoft.Compute.MultiVm",
     "version": "0.1.2-preview",
     "parameters": {
-        "basics": [ ],
-        "steps": [ ],
-        "outputs": {}
+        "basics": [
+          {
+            "name": "basicsInfoBox",
+            "type": "Microsoft.Common.InfoBox",
+            "visible": true,
+            "options":{
+              "icon": "Info",
+              "text": "This is the basic step, you can only use Microsoft.Common.* elements and elements which are NOT dependent on the users subscription resourcegroup and location",
+              "uri": "https://www.cloudnative.at"
+            }
+          },
+          {
+            "name": "basicsTextBox",
+            "type": "Microsoft.Common.TextBox",
+            "label": "Basics - Textbox",
+            "defaultValue": "Enter your default value here",
+            "toolTip": "This allows you to ask for text values in the Basic steps and take them as parameters in the deployment template",
+            "visible": true,
+            "constraints": {
+              "required": true,
+              "regex": "^[a-z0-9A-Z]{1,10}$",
+              "validationMessage": "Validated by regex code '^[a-z0-9A-Z]{1,10}$' (Letters and number between 1-19)"
+            }
+          }
+        ],
+        "steps": [ 
+          {
+            "name": "Step1",
+            "label": "Step1 - Common Elements",
+            "subLabel": {
+              "preValidation": "steps: Step1 - sublabel: This is a prevalidation",
+              "postValidation": "steps - Step1 - sublabel: This is a postvalidation"
+            },
+            "elements": [
+              {
+                "name": "Step1Element1",
+                "label": "Step 1 Element1 - Microsoft.Common.TextBox",
+                "type": "Microsoft.Common.TextBox",
+                "constraints":{
+                  "required": true
+                }
+              },
+              {
+                "name": "Step1Element2",
+                "label": "Step 1 Element 2 - Microsoft.Common.DropDown",
+                "type": "Microsoft.Common.DropDown",
+                "defaultValue": "Value2",
+                "constraints": {
+                  "allowedValues": [
+                    {
+                      "label": "Value 1",
+                      "value": "Value1"
+                    },
+                    {
+                      "label": "Value 2",
+                      "value": "Value2"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ],
+        "outputs": {
+          "location": "[location()]",
+          "basicsName": "[basics('basicsName')]",
+          "step1element1": "[steps('Step1').Step1Element1.name]",
+          "step1element1": "[steps('Step1').Step1Element2.name]"
+        }
     }
 }
