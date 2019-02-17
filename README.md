@@ -31,7 +31,15 @@ Enter your questions here to collect all parameters for your ARM Template
 ### Output:
 This must match the parameters section of the target ARM Template 1:1 if this is not the case, your deployment will not work
 
-## Test the UI before you do y deployment !!
+## Test the UI before you do your deployment !!
 A problem i ran into when trying to all at once is that i edited the ARM template and the UI definition file in paralles - BAD IDEA
 First - test the UI, and only if this works combine it with the ARM template - saves a lot of time.
 Testing the UI is described here https://docs.microsoft.com/en-us/azure/managed-applications/test-createuidefinition and a modified version of the PowerShell script using the Az.* modules is linked in this repo.
+
+So, create your UI using the followinf steps
+- [ ] Create an ARM Template which works with parameters coming from a parameter template file or a parameter object
+- [ ] Be sure the template works and collect the parameters needed
+- [ ] Create the UI and test it in the portal
+- [ ] Combine UI and ARM Template
+
+
