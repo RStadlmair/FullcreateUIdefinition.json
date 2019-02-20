@@ -36,12 +36,22 @@ Make sure you always have the following elements in your steps configuration, ot
 * bladeTitle
 * bladeSubtitle
 
-
-
 ### Output:
-This must match the parameters section of the target ARM Template 1:1 if this is not the case, your deployment will not work
+This must match the parameters section of the target ARM Template 1:1 if this is not the case, your deployment will not work.
+
+If you specify a parameter in steps which emits data (i.e. a Textbox), but dont reference it in the output section, the value will still be emitted with its label as name. This can lead to confisuin between the CreateUIdefinition.JSON output and the ARM-template.
+
+If you have any typos in the outputs section, the template will not raise an error, but you may not get the results you want, so take ccare here and test, test, test.
+
+## Notes on UI Elements
+
+# Microsoft.Compute.SizeSelector
+
+The "size" parameter defines how many VM´s will be created at once,
 
 ## Test the UI before you do your deployment !!
+Test the UI always until the end. a section may work, but its important to know if also your output values are correct.
+
 A problem i ran into when trying to all at once is that i edited the ARM template and the UI definition file in paralles - BAD IDEA
 First - test the UI, and only if this works combine it with the ARM template - saves a lot of time.
 Testing the UI is described here https://docs.microsoft.com/en-us/azure/managed-applications/test-createuidefinition and a modified version of the PowerShell script using the Az.* modules is linked in this repo.

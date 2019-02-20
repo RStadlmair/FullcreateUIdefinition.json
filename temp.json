@@ -1,0 +1,416 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/0.1.2-preview/CreateUIDefinition.MultiVm.json#",
+    "handler": "Microsoft.Compute.MultiVm",
+    "version": "0.1.2-preview",
+    "parameters": {
+        "basics": [
+          {
+            "name": "basicsInfoBox",
+            "type": "Microsoft.Common.InfoBox",
+            "visible": true,
+            "options":{
+              "icon": "Info",
+              "text": "Basics- InfoBox.  This is the basic step, you can only use Microsoft.Common.* elements and elements which are NOT dependent on the users subscription, resourcegroup and location",
+              "uri": "https://www.cloudnative.at"
+            }
+          },
+          {
+            "name": "basicsTextBox",
+            "type": "Microsoft.Common.TextBox",
+            "label": "Basics - Textbox",
+            "defaultValue": "Enter your default value here",
+            "toolTip": "This allows you to ask for text values in the Basic steps and take them as parameters in the deployment template",
+            "visible": true,
+            "constraints": {
+              "required": true,
+              "regex": "^[a-z0-9A-Z]{1,10}$",
+              "validationMessage": "Validated by regex code '^[a-z0-9A-Z]{1,10}$' (Letters and number between 1-19)"
+            }
+          }
+        ],
+        "steps": [ 
+          {
+            "name": "Step1",
+            "label": "Step1 - Common elements",
+            "bladeTitle": "Step1 Bladetitle",
+            "bladeSubtitle": "Step 1 Bladesubtitle",
+            "subLabel": {
+              "preValidation": "Common elements",
+              "postValidation": "Done"
+            },
+            "elements": [
+              {
+                "name": "Step1Element1",
+                "label": "Step 1 Element1 - Microsoft.Common.TextBox",
+                "type": "Microsoft.Common.TextBox",
+                "constraints":{
+                  "required": false
+                }
+              },
+              {
+                "name": "Step1Element2",
+                "label": "Step 1 Element 2 - Microsoft.Common.DropDown",
+                "type": "Microsoft.Common.DropDown",
+                "defaultValue": "Value 2",
+                "constraints": {
+                  "allowedValues": [
+                    {
+                      "label": "Value 1",
+                      "value": "Value1"
+                    },
+                    {
+                      "label": "Value 2",
+                      "value": "Value2"
+                    },
+                    {
+                      "label": "Value 3",
+                      "value": "Value3"
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "Step1Element3",
+                "label": "Step 1 Element 3 - Microsoft.Common.FileUpload",
+                "type": "Microsoft.Common.FileUpload",
+                "toolTip": "Use this to upload files to you offering. AS an example it is limited to certificates.",
+                "constraints": {
+                  "required": false,
+                  "accept": ".pfx,.p12,.cer,.crt"
+                },
+                "options": {
+                  "encoding": "UTF-8",
+                  "multiple": true,
+                  "openMode": "binary",
+                  "uploadMode": "file"
+                }
+              },
+              {
+                "name": "Step1Element4",
+                "type": "Microsoft.Common.InfoBox",
+                "visible": true,
+                "options": {
+                  "icon": "Info",
+                  "uri": "https://www.cloudnative.at",
+                  "text": "Use Infoboxes to display information for the user to copmlete steps in your questions. Also provide links to external sources ith the 'uri'. YOu cannor format this text, it will show up in one block. Infoboxes are not emitting anything, so you cannot reference them in outputs."
+                }
+              },
+              {
+                "name": "Step1Element5",
+                "type": "Microsoft.Common.Section",
+                "label": "Step 1 Element 5 - Microsoft.Common.Section",
+                "elements": [
+                  {
+                    "name": "SectionElement1",
+                    "type": "Microsoft.Common.TextBlock",
+                    "visible": true,
+                    "options": {
+                      "text": "This is how a Microsoft.Common.TextBlock shows up on the ui. Add Label and Links to it as needed.",
+                      "link": {
+                          "label": "A Textblock within a section",
+                          "uri": "https://www.cloudnative.at"
+                      }
+                    } 
+                  },
+                  {
+                    "name": "SectionElement2",
+                    "type": "Microsoft.Common.PasswordBox",
+                    "label": {
+                      "password": "Password",
+                      "confirmPassword": "Confirm password"
+                    },
+                    "toolTip": "A Password entry box within a section",
+                    "constraints": {
+                      "required": false,
+                      "regex": "[a-z]",
+                      "validationMessage": "As i am bad in RegEx, please use only small letters"
+                    },
+                    "options": {
+                      "hideConfirmation": true
+                    },
+                    "visible": true
+                  }
+                ],
+                "visible": true
+              }
+            ]
+          },
+          {
+            "name": "Step2",
+            "label": "Step 2 - Microsoft.Compute elements",
+            "bladeTitle": "Step2 Bladetitle",
+            "bladeSubtitle": "Step 2 BladeSubtitle",
+            "subLabel": {
+              "postValidation": "Done",
+              "preValidation": "Compute Elements"
+            },
+            "elements": [
+              {
+                "name": "Step2Element1",
+                "type": "Microsoft.Compute.CredentialsCombo",
+                "label": {
+                  "password": "Password",
+                  "confirmPassword": "Confirm Password"
+                  },
+                "toolTip": {
+                  "password": "Step 2 Element 1 - Microsoft.Compute.CredentialsCombo Windows style"
+                  },
+                "constraints": {
+                  "required": false,
+                  "customPasswordRegex": "[a-z]",
+                  "customValidationMessage": "Enter small characters from a-z"
+                  },
+                "options": {
+                  "hideConfirmation": true
+                  },
+                "osPlatform": "Windows",
+                "visible": true
+              },
+              {
+                "name": "Step2Element2",
+                "type": "Microsoft.Compute.CredentialsCombo",
+                "label": {
+                  "authenticationType": "Authentication type",
+                  "password": "Password",
+                  "confirmPassword": "Confirm password",
+                  "sshPublicKey": "SSH public key"
+                },
+                "toolTip": {
+                  "authenticationType": "Switch between public Key and username/password authentication",
+                  "password": "Password",
+                  "sshPublicKey": "Confirm Password"
+                },
+                "constraints": {
+                  "required": false,
+                  "customPasswordRegex": "[a-z]",
+                  "customValidationMessage": "Enter small characters from a-z"
+                },
+                "options": {
+                  "hideConfirmation": true,
+                  "hidePassword": false
+                },
+                "osPlatform": "Linux",
+                "visible": true
+              },
+              {
+                "name": "Step2Element3",
+                "type": "Microsoft.Compute.SizeSelector",
+                "label": "Step 2 Element 3 - Microsoft.Compute.SizeSelector",
+                "toolTip": "Select a VM Size directly and limit it with recommended sizes (First is udes as default). ",
+                "recommendedSizes": [
+                  "Standard_D1",
+                  "Standard_D2",
+                  "Standard_D3"
+                ],
+                "constraints": {
+                  "allowedSizes": [
+                    "Standard_D1",
+                    "Standard_D2",
+                    "Standard_D3",
+                    "Standard_D1_v2",
+                    "Standard_D2_v2",
+                    "Standard_D3_v2"
+                  ]
+                },
+                "options": {
+                  "hideDiskTypeFilter": false
+                },
+                "osPlatform": "Windows",
+                "imageReference": {
+                  "publisher": "MicrosoftWindowsServer",
+                  "offer": "WindowsServer",
+                  "sku": "2012-Datacenter"
+                },
+                "count": 2,
+                "visible": true
+              },
+              {
+                "name": "Step2Element4",
+                "type": "Microsoft.Compute.UserNameTextBox",
+                "label": "Step 2 Element 4 - Microsoft.Compute.UserNameTextBox",
+                "defaultValue": "user@yourdomain.com",
+                "constraints": {
+                  "required": true,
+                  "regex": "[a-z]",
+                  "validationMessage": "small letters a-z"
+                },
+                "osPlatform": "Windows",
+                "visible": true
+              }
+            ]
+          },
+          {
+            "name": "Step3",
+            "label": "Step 3 - Microsoft.Networking elements",
+            "bladeTitle": "Step3 BladeTitle",
+            "bladeSubtitle": "Step2 BladeSubtitle",
+            "subLabel": {
+              "preValidation": "Networking Elements",
+              "postValidation": "Done"
+            },
+            "elements": [
+              {
+                "name": "Step3Element1",
+                "type": "Microsoft.Network.PublicIpAddressCombo",
+                "label": {
+                  "publicIpAddress": "Public IP address",
+                  "domainNameLabel": "Domain name label"
+                },
+                "toolTip": {
+                  "publicIpAddress": "Select an existing public IP Address here, or lets create a new one.",
+                  "domainNameLabel": "Domain prefix for the IP address"
+                },
+                "defaultValue": {
+                  "publicIpAddressName": "ip01",
+                  "domainNameLabel": "mydomain"
+                },
+                "constraints": {
+                  "required": {
+                    "domainNameLabel": true
+                  }
+                },
+                "options": {
+                  "hideNone": false,
+                  "hideDomainNameLabel": false,
+                  "hideExisting": false
+                },
+                "visible": true
+              },
+              {
+                "name": "Step3Element2",
+                "type": "Microsoft.Network.VirtualNetworkCombo",
+                "label": {
+                  "virtualNetwork": "Virtual network selecttion",
+                  "subnets": "Subnets selection"
+                },
+                "toolTip": {
+                  "virtualNetwork": "Use this to create a new or select an existing virtual network. Important: The output is a JSON, not a string only",
+                  "subnets": "Use this to create a new or select an existing subnet"
+                },
+                "defaultValue": {
+                  "name": "vnet01",
+                  "addressPrefixSize": "/16"
+                },
+                "constraints": {
+                  "minAddressPrefixSize": "/16"
+                },
+                "options": {
+                  "hideExisting": false
+                },
+                "subnets": {
+                  "subnet1": {
+                    "label": "First subnet",
+                    "defaultValue": {
+                      "name": "subnet-1",
+                      "addressPrefixSize": "/24"
+                    },
+                    "constraints": {
+                      "minAddressPrefixSize": "/24",
+                      "minAddressCount": 12,
+                      "requireContiguousAddresses": true
+                    }
+                  },
+                  "subnet2": {
+                    "label": "Second subnet",
+                    "defaultValue": {
+                      "name": "subnet-2",
+                      "addressPrefixSize": "/26"
+                    },
+                    "constraints": {
+                      "minAddressPrefixSize": "/26",
+                      "minAddressCount": 8,
+                      "requireContiguousAddresses": true
+                    }
+                  }
+                },
+                "visible": true  
+              }
+            ]
+          },
+          {
+            "name": "Step4",
+            "label": "Step 4 - Microsoft.Storage elements",
+            "bladeTitle": "Step4 Bladetitle",
+            "bladeSubtitle": "Step 4 BladeSubtitle",
+            "subLabel": {
+              "preValidation": "Storage Elements",
+              "postValidation": "Done"
+            },
+            "elements": [
+              {
+                "name": "Step4Element1",
+                "type": "Microsoft.Storage.MultiStorageAccountCombo",
+                "toolTip": {
+                  "prefix": "If multiple storage accounts are created a prefix will be used. Important: the output is a JSON object",
+                  "type": "The type will be used for all created accounts"
+                },
+                "label": {
+                  "prefix": "Select the storage account prefix",
+                  "type": "Select teh storage account type"
+                },
+                "defaultValue": {
+                  "prefix": "cloudnative",
+                  "type": "Standard_LRS"
+                },
+                "constraints":{
+                  "allowedTypes": [
+                    "Premium_LRS",
+                    "Standard_LRS"
+                  ]
+                },
+                "count": 2,
+                "visible": true
+              },
+              {
+                "name": "Step4Element2",
+                "type": "Microsoft.Storage.StorageAccountSelector",
+                "label": "Step 4 Element 2 - Microsoft.Storage.StorageAccountSelector",
+                "toolTip": "Select an existing storage account",
+                "defaultValue": {
+                  "name": "azurestorage",
+                  "type": "Standard_LRS"
+                },
+                "constraints": {
+                  "allowedTypes": [
+                    "Standard_LRS"
+                  ]
+                },
+                "options": {
+                  "hideExisting": false
+                },
+                "visible": true
+              }
+            ]
+          }
+        ],
+        "outputs": {
+          "location": "[location()]",
+          "basicsName": "[basics('basicsTextBox')]",
+          "step1Element1": "[steps('Step1').Step1Element1]",
+          "step1Element2": "[steps('Step1').Step1Element2]",
+          "step1Element3": "[steps('Step1').Step1Element3]",
+          "step1Element5": "[steps('Step1').Step1Element5]",
+          "step2Element1": "[steps('Step2').Step2Element1]",
+          "step2Element2": "[steps('Step2').Step2Element2]",
+          "step2Element3": "[steps('Step2').Step2Element3]",
+          "step2Element4": "[steps('Step2').Step2Element4]",
+          "step3Element1": "[steps('Step3').Step2Element1]",
+          "step3Element2": "[steps('Step3').Step2Element2]",
+          "step4Element1": "[steps('Step4').Step4Element1]",
+          "step4Element2": "[steps('Step4').Step4Element2]",
+          "funcConcat1": "[concat('foo','bar')]",
+          "funcConcat2": "[concat('foo',steps('Step1').Step1Element1)]",
+          "funcSubString": "[substring('https://www.cloudnative.at',12,14)]",
+          "funcReplace": "[replace('https://www.cloudnative.at','cloudnative','powershell.co.at')]",
+          "funcGuid": "[guid()]",
+          "funcToLower": "[toLower(HTTPS://WWW.ClOuDnAtIvE.at)]",
+          "funcToUpper": "[toUpper(HTTPS://WWW.ClOuDnAtIvE.at)]",
+          "funcContains1": "[contains('https://www.cloudnative.at', 'cloud')]",
+          "funcContains2temp": "[contains('steps('Step1').Step1Element2, Value1)]",
+          "funcContains3temp": "[contains('steps('Step3').Step3Element1, 24)]",
+          "funcLenght1": "[lenght('https://www.cloudnative.at')]",
+          "funcLenght2temp": "[lenght('https://www.cloudnative.at')]",
+          "funcLenght3temp": "[lenght('https://www.cloudnative.at')]"
+        }
+    }
+}
