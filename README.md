@@ -1,12 +1,14 @@
 # FullcreateUIdefinition.json
 Sample createuidefinition.json file for Azure Marketplace and Managed Applications with all possible options for reference and your experiments.
 
-## Notes and Links:
-Main documentation from the Microsoft docs website:
-https://docs.microsoft.com/en-us/azure/managed-applications/publish-service-catalog-app
+** This is work in progress and gets (hopefully) updated on a regular basis.
 
-Managed App Samples on Github:
-https://github.com/Azure/azure-managedapp-samples
+## Notes and Links:
+[Main documentation from the Microsoft docs website:](https://docs.microsoft.com/en-us/azure/managed-applications/publish-service-catalog-app)
+
+[Managed App Samples on Github:](https://github.com/Azure/azure-managedapp-samples)
+
+[Github Repository with original schema files:](https://github.com/Azure/azure-resource-manager-schemas/tree/master/schemas/0.1.2-preview)
 
 ## Editing:
 I use VS Code to edit the files with the following extensions:
@@ -26,7 +28,15 @@ Typically when you edit a UI definition, VC Code offes you which options you can
 In the basics section, you can in general only use the Microsoft.Common.* elements and elements which do not require the users subscription, resource group or location. 
 
 ### Steps:
-Enter your questions here to collect all parameters for your ARM Template
+Enter your questions here to collect all parameters for your ARM Template.
+Make sure you always have the following elements in your steps configuration, otherwise the ui will not load.
+* name (unique name for referencing the element in output and in functions)
+* label: (shows up in the menu)
+* bladeSubtitle with pre and post validation messages for sart and end of the questionaire
+* bladeTitle
+* bladeSubtitle
+
+
 
 ### Output:
 This must match the parameters section of the target ARM Template 1:1 if this is not the case, your deployment will not work
