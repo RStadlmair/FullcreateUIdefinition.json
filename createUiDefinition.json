@@ -241,7 +241,7 @@
           },
           {
             "name": "Step3",
-            "label": "Step 3 - Microsoft.Networking elements",
+            "label": "Step 3 - Networking elements",
             "bladeTitle": "Step3 BladeTitle",
             "bladeSubtitle": "Step2 BladeSubtitle",
             "subLabel": {
@@ -326,6 +326,61 @@
                 "visible": true  
               }
             ]
+          },
+          {
+            "name": "Step4",
+            "label": "Step 4 - Storage elements",
+            "bladeTitle": "Step4 Bladetitle",
+            "bladeSubtitle": "Step 4 BladeSubtitle",
+            "subLabel": {
+              "preValidation": "Microsoft.Storage",
+              "postValidation": "Done"
+            },
+            "elements": [
+              {
+                "name": "Step4Element1",
+                "type": "Microsoft.Storage.MultiStorageAccountCombo",
+                "toolTip": {
+                  "prefix": "If multiple storage accounts are created a prefix will be used. Important: the output is a JSON object",
+                  "type": "The type will be used for all created accounts"
+                },
+                "label": {
+                  "prefix": "Select the storage account prefix",
+                  "type": "Select the storage account type"
+                },
+                "defaultValue": {
+                  "prefix": "cloudnative",
+                  "type": "Standard_LRS"
+                },
+                "constraints":{
+                  "allowedTypes": [
+                    "Premium_LRS",
+                    "Standard_LRS"
+                  ]
+                },
+                "count": 2,
+                "visible": true
+              },
+              {
+                "name": "Step4Element2",
+                "type": "Microsoft.Storage.StorageAccountSelector",
+                "label": "Step 4 Element 2 - Microsoft.Storage.StorageAccountSelector",
+                "toolTip": "Select an existing storage account",
+                "defaultValue": {
+                  "name": "azurestorage",
+                  "type": "Standard_LRS"
+                },
+                "constraints": {
+                  "allowedTypes": [
+                    "Standard_LRS"
+                  ]
+                },
+                "options": {
+                  "hideExisting": false
+                },
+                "visible": true
+              }
+            ]
           }
         ],
         "outputs": {
@@ -337,7 +392,9 @@
           "step2Element2": "[steps('Step2').Step2Element2]",
           "step2Element3": "[steps('Step2').Step2Element3]",
           "step3Element1": "[steps('Step3').Step3Element1]",
-          "step3Element2": "[steps('Step3').Step3Element2]"
+          "step3Element2": "[steps('Step3').Step3Element2]",
+          "step4Element1": "[steps('Step4').Step4Element1]",
+          "step4Element2": "[steps('Step3').Step4Element2]"
         }
     }
 }
