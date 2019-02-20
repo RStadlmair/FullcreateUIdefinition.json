@@ -45,9 +45,9 @@ If you have any typos in the outputs section, the template will not raise an err
 
 ## Notes on UI Elements
 
-# Microsoft.Compute.SizeSelector
+### Microsoft.Compute.SizeSelector
 
-The "size" parameter defines how many VM´s will be created at once,
+The "size" parameter defines how many VM´s will be created at once. Example: You select size "Standard_D1" and size=2, the selection windows shows 2x"Standard_D1", but the output is still "Standard_D1".
 
 ## Test the UI before you do your deployment !!
 Test the UI always until the end. a section may work, but its important to know if also your output values are correct.

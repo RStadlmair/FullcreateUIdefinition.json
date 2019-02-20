@@ -35,7 +35,7 @@
             "bladeTitle": "Step1 Bladetitle",
             "bladeSubtitle": "Step 1 Bladesubtitle",
             "subLabel": {
-              "preValidation": "Microsoft.Common elements",
+              "preValidation": "Microsoft.Common",
               "postValidation": "Done"
             },
             "elements": [
@@ -140,7 +140,7 @@
             "bladeTitle": "Step2 - Bladetitle",
             "bladeSubtitle": "Step2 - BladeSubtitle",
             "subLabel": {
-              "preValidation": "Microsoft.Compute Elements",
+              "preValidation": "Microsoft.Compute",
               "postValidation": "Done"
             },
             "elements": [
@@ -194,7 +194,7 @@
               {
                 "name": "Step2Element3",
                 "type": "Microsoft.Compute.SizeSelector",
-                "label": "Step 2 Element 3 - Microsoft.Compute.SizeSelector",
+                "label": "S2E3-Microsoft.Compute.SizeSelector",
                 "toolTip": "Select a VM Size directly and limit it with recommended sizes (First is udes as default). ",
                 "recommendedSizes": [
                   "Standard_D1",
@@ -222,6 +222,108 @@
                 },
                 "count": 2,
                 "visible": true
+              },
+              {
+                "name": "Step2Element4",
+                "type": "Microsoft.Compute.UserNameTextBox",
+                "label": "S2E4-Microsoft.Compute.UserNameTextBox",
+                "toolTip": "Windows Username Selection",
+                "defaultValue": "user@yourdomain.com",
+                "constraints": {
+                  "required": false,
+                  "regex": "",
+                  "validationMessage": ""
+                },
+                "osPlatform": "Windows",
+                "visible": true
+              }
+            ]
+          },
+          {
+            "name": "Step3",
+            "label": "Step 3 - Microsoft.Networking elements",
+            "bladeTitle": "Step3 BladeTitle",
+            "bladeSubtitle": "Step2 BladeSubtitle",
+            "subLabel": {
+              "preValidation": "Microsoft.Networking",
+              "postValidation": "Done"
+            },
+            "elements": [
+              {
+                "name": "Step3Element1",
+                "type": "Microsoft.Network.PublicIpAddressCombo",
+                "label": {
+                  "publicIpAddress": "Public IP address",
+                  "domainNameLabel": "Domain name label"
+                },
+                "toolTip": {
+                  "publicIpAddress": "Select an existing public IP Address here, or lets create a new one.",
+                  "domainNameLabel": "Domain prefix for the IP address"
+                },
+                "defaultValue": {
+                  "publicIpAddressName": "ip01",
+                  "domainNameLabel": "mydomain"
+                },
+                "constraints": {
+                  "required": {
+                    "domainNameLabel": true
+                  }
+                },
+                "options": {
+                  "hideNone": false,
+                  "hideDomainNameLabel": false,
+                  "hideExisting": false
+                },
+                "visible": true
+              },
+              {
+                "name": "Step3Element2",
+                "type": "Microsoft.Network.VirtualNetworkCombo",
+                "label": {
+                  "virtualNetwork": "Virtual network selecttion",
+                  "subnets": "Subnets selection"
+                },
+                "toolTip": {
+                  "virtualNetwork": "Use this to create a new or select an existing virtual network. Important: The output is a JSON, not a string only",
+                  "subnets": "Use this to create a new or select an existing subnet"
+                },
+                "defaultValue": {
+                  "name": "vnet01",
+                  "addressPrefixSize": "/16"
+                },
+                "constraints": {
+                  "minAddressPrefixSize": "/16"
+                },
+                "options": {
+                  "hideExisting": false
+                },
+                "subnets": {
+                  "subnet1": {
+                    "label": "First subnet",
+                    "defaultValue": {
+                      "name": "subnet-1",
+                      "addressPrefixSize": "/24"
+                    },
+                    "constraints": {
+                      "minAddressPrefixSize": "/24",
+                      "minAddressCount": 12,
+                      "requireContiguousAddresses": true
+                    }
+                  },
+                  "subnet2": {
+                    "label": "Second subnet",
+                    "defaultValue": {
+                      "name": "subnet-2",
+                      "addressPrefixSize": "/26"
+                    },
+                    "constraints": {
+                      "minAddressPrefixSize": "/26",
+                      "minAddressCount": 8,
+                      "requireContiguousAddresses": true
+                    }
+                  }
+                },
+                "visible": true  
               }
             ]
           }
@@ -233,7 +335,9 @@
           "step1Element3": "[steps('Step1').Step1Element3]",
           "step2Element1": "[steps('Step2').Step2Element1]",
           "step2Element2": "[steps('Step2').Step2Element2]",
-          "step2Element3": "[steps('Step2').Step2Element3]"
+          "step2Element3": "[steps('Step2').Step2Element3]",
+          "step3Element1": "[steps('Step3').Step3Element1]",
+          "step3Element2": "[steps('Step3').Step3Element2]"
         }
     }
 }
