@@ -17,7 +17,7 @@
           {
             "name": "basicsTextBox",
             "type": "Microsoft.Common.TextBox",
-            "label": "Basics - Textbox",
+            "label": "Basics - Textbox (also applicationResourceName)",
             "defaultValue": "",
             "toolTip": "This allows you to ask for text values in the Basic steps and take them as parameters in the deployment template",
             "visible": true,
@@ -99,6 +99,7 @@
                 "name": "Step1Element5",
                 "type": "Microsoft.Common.Section",
                 "label": "S1E5-Microsoft.Common.Section",
+                "visible": true,
                 "elements": [
                   {
                     "name": "SectionElement1",
@@ -228,7 +229,7 @@
                 "type": "Microsoft.Compute.UserNameTextBox",
                 "label": "S2E4-Microsoft.Compute.UserNameTextBox",
                 "toolTip": "Windows Username Selection",
-                "defaultValue": "user@yourdomain.com",
+                "defaultValue": "Hans Müller",
                 "constraints": {
                   "required": false,
                   "regex": "",
@@ -339,6 +340,16 @@
             "elements": [
               {
                 "name": "Step4Element1",
+                "type": "Microsoft.Common.InfoBox",
+                "visible": true,
+                "options": {
+                  "icon": "Info",
+                  "uri": "https://www.cloudnative.at",
+                  "text": "Below is a MULTI-account storage create/select combo"
+                }
+              },
+              {
+                "name": "Step4Element2",
                 "type": "Microsoft.Storage.MultiStorageAccountCombo",
                 "toolTip": {
                   "prefix": "If multiple storage accounts are created a prefix will be used. Important: the output is a JSON object",
@@ -362,17 +373,28 @@
                 "visible": true
               },
               {
-                "name": "Step4Element2",
+                "name": "Step4Element3",
+                "type": "Microsoft.Common.InfoBox",
+                "visible": true,
+                "options": {
+                  "icon": "Info",
+                  "uri": "https://www.cloudnative.at",
+                  "text": "Below is a SINGLE-account storage create/select combo"
+                }
+              },
+              {
+                "name": "Step4Element4",
                 "type": "Microsoft.Storage.StorageAccountSelector",
-                "label": "Step 4 Element 2 - Microsoft.Storage.StorageAccountSelector",
-                "toolTip": "Select an existing storage account",
+                "label": "S4E2-Microsoft.Storage.StorageAccountSelector",
+                "toolTip": "Create new or select an existing storage account. Currently this doesnt support more than StandardV1 accounts...",
                 "defaultValue": {
-                  "name": "azurestorage",
+                  "name": "cloudnativestorage",
                   "type": "Standard_LRS"
                 },
                 "constraints": {
                   "allowedTypes": [
-                    "Standard_LRS"
+                    "Standard_LRS",
+                    "Standard_RAGRS"
                   ]
                 },
                 "options": {
@@ -385,6 +407,7 @@
         ],
         "outputs": {
           "location": "[location()]",
+          "applicationResourceName": "[steps('Step1').Step1Element1]",
           "step1Element1": "[steps('Step1').Step1Element1]",
           "step1Element2": "[steps('Step1').Step1Element2]",
           "step1Element3": "[steps('Step1').Step1Element3]",
@@ -393,8 +416,9 @@
           "step2Element3": "[steps('Step2').Step2Element3]",
           "step3Element1": "[steps('Step3').Step3Element1]",
           "step3Element2": "[steps('Step3').Step3Element2]",
-          "step4Element1": "[steps('Step4').Step4Element1]",
-          "step4Element2": "[steps('Step3').Step4Element2]"
+          "step4Element1": "[steps('Step4').Step4Element2]",
+          "step4Element2": "[steps('Step4').Step4Element4]",
+          "funcConcat1": "[concat('foo','bar')]"
         }
     }
 }
