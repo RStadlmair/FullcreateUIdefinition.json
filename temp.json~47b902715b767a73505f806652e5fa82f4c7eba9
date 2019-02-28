@@ -1,0 +1,43 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/0.1.2-preview/CreateUIDefinition.MultiVm.json#",
+    "handler": "Microsoft.Compute.MultiVm",
+    "version": "0.1.2-preview",
+    "parameters": {
+        "basics": [
+          { }
+        ],
+        "steps": [
+          { } 
+            ]
+          },
+        "outputs": {
+          "location": "[location()]",
+          "basicsName": "[basics('basicsTextBox')]",
+          "step1Element1": "[steps('Step1').Step1Element1]",
+          "step1Element2": "[steps('Step1').Step1Element2]",
+          "step1Element3": "[steps('Step1').Step1Element3]",
+          "step1Element5": "[steps('Step1').Step1Element5]",
+          "step2Element1": "[steps('Step2').Step2Element1]",
+          "step2Element2": "[steps('Step2').Step2Element2]",
+          "step2Element3": "[steps('Step2').Step2Element3]",
+          "step2Element4": "[steps('Step2').Step2Element4]",
+          "step3Element1": "[steps('Step3').Step2Element1]",
+          "step3Element2": "[steps('Step3').Step2Element2]",
+          "step4Element1": "[steps('Step4').Step4Element1]",
+          "step4Element2": "[steps('Step4').Step4Element2]",
+          "funcConcat1": "[concat('foo','bar')]",
+          "funcConcat2": "[concat('foo',steps('Step1').Step1Element1)]",
+          "funcSubString": "[substring('https://www.cloudnative.at',12,14)]",
+          "funcReplace": "[replace('https://www.cloudnative.at','cloudnative','powershell.co.at')]",
+          "funcGuid": "[guid()]",
+          "funcToLower": "[toLower(HTTPS://WWW.ClOuDnAtIvE.at)]",
+          "funcToUpper": "[toUpper(HTTPS://WWW.ClOuDnAtIvE.at)]",
+          "funcContains1": "[contains('https://www.cloudnative.at', 'cloud')]",
+          "funcContains2temp": "[contains('steps('Step1').Step1Element2, Value1)]",
+          "funcContains3temp": "[contains('steps('Step3').Step3Element1, 24)]",
+          "funcLenght1": "[lenght('https://www.cloudnative.at')]",
+          "funcLenght2temp": "[lenght('https://www.cloudnative.at')]",
+          "funcLenght3temp": "[lenght('https://www.cloudnative.at')]"
+        }
+    }
+}
